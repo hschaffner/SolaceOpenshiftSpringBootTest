@@ -1,0 +1,42 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+		solaceStarterVersion = '2.1.0'
+	}
+    repositories {
+    	mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+//apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'solace-messaging-demo-aggregator-app'
+    version =  ''
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    
+    // Solace Java API
+    //compile("com.solace.labs.spring.boot:solace-java-spring-boot-starter:${solaceStarterVersion}")
+    compile("com.solace.spring.boot:solace-java-spring-boot-starter:${solaceStarterVersion}")
+
+    compile("org.json:json:20151123")
+}
+
+task wrapperSol(type: Wrapper) {
+    gradleVersion = '5.1.1'
+}
